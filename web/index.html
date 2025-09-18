@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Jira QA Pulse</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="#queue" aria-label="Jira QA Pulse, очередь QA">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>QA Pulse<small>Jira Analytics</small></span>
+      </a>
+      <div class="workspace">
+        <span class="project-initial" aria-hidden="true">S</span>
+        <span><strong id="project">SHOP</strong><small>Проект Jira</small></span>
+      </div>
+      <nav class="nav" aria-label="Разделы отчёта">
+        <a href="#queue" id="queue-link" aria-current="page"><span class="nav-icon queue-icon" aria-hidden="true"></span>Очередь QA</a>
+        <a href="#failures" id="failures-link"><span class="nav-icon failure-icon" aria-hidden="true"></span>Сбои отчётов</a>
+      </nav>
+      <div class="sidebar-footer"><span class="live-dot"></span>Демонстрационные данные</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <span>Аналитика QA</span>
+        <time id="snapshot">Загрузка среза…</time>
+      </header>
+
+      <div class="content">
+        <div class="error" id="error" role="alert" hidden>
+          <span>Не удалось загрузить данные отчёта.</span>
+          <button type="button" id="reload">Повторить</button>
+        </div>
+
+        <section id="queue" aria-labelledby="queue-title">
+          <div class="page-heading">
+            <div>
+              <h1 id="queue-title">Очередь тестирования</h1>
+              <p>Текущее ожидание, время проверки и возвраты в разработку.</p>
+            </div>
+          </div>
+          <div class="metrics queue-metrics" id="queue-metrics" aria-label="Показатели очереди"></div>
+          <div class="split">
+            <article class="panel">
+              <header class="panel-heading">
+                <div class="panel-title"><h2>Готовы к проверке</h2><span class="count" id="queue-count"></span></div>
+                <span class="panel-hint">Дольше всех вверху</span>
+              </header>
+              <div class="table-scroll">
+                <table aria-label="Задачи в очереди QA">
+                  <thead><tr><th scope="col">Задача</th><th scope="col">Сейчас ждёт</th><th scope="col">Попытка</th></tr></thead>
+                  <tbody id="queue-rows"></tbody>
+                </table>
+              </div>
+            </article>
+            <article class="panel detail" id="issue-detail" aria-label="Детали задачи"></article>
+          </div>
+        </section>
+
+        <section id="failures" aria-labelledby="failures-title" hidden>
+          <div class="page-heading">
+            <div>
+              <h1 id="failures-title">Сбои отчётов</h1>
+              <p>Причины сбоев, повторные прогоны и операции на тестовом стенде.</p>
+            </div>
+            <label class="period">Период
+              <select id="period">
+                <option value="7">Последние 7 дней</option>
+                <option value="30">Последние 30 дней</option>
+                <option value="all">Весь период</option>
+              </select>
+            </label>
+          </div>
+          <div class="metrics incident-metrics" id="failure-metrics" aria-label="Показатели сбоев"></div>
+          <div class="split">
+            <article class="panel">
+              <header class="panel-heading report-heading">
+                <div class="panel-title"><h2>Сбои по прогонам</h2><span class="count" id="failure-count"></span></div>
+                <label class="filter"><span class="sr-only">Причина сбоя</span>
+                  <select id="cause-filter">
+                    <option value="all">Все причины</option>
+                    <option value="QA_INPUT">Ошибки запуска QA</option>
+                    <option value="UNDER_REVIEW">На разборе</option>
+                    <option value="ENVIRONMENT">Стенд</option>
+                    <option value="REPORT_CODE">Код отчёта</option>
+                    <option value="CI">CI</option>
+                  </select>
+                </label>
+              </header>
+              <div class="table-scroll">
+                <table aria-label="Сбои отчётов по прогонам">
+                  <thead><tr><th scope="col">Прогон</th><th scope="col">Причина</th><th scope="col">Повторы</th><th scope="col">Стенд</th></tr></thead>
+                  <tbody id="failure-rows"></tbody>
+                </table>
+              </div>
+            </article>
+            <article class="panel detail" id="failure-detail" aria-label="Детали сбоя"></article>
+          </div>
+          <article class="panel tester-panel">
+            <header class="panel-heading">
+              <div class="panel-title"><h2>Подтверждённые ошибки запуска QA</h2></div>
+            </header>
+            <div class="table-scroll">
+              <table aria-label="Подтверждённые ошибки по тестировщикам">
+                <thead><tr><th scope="col">Тестировщик</th><th scope="col">Сбои</th><th scope="col">Перезапуски</th><th scope="col">Развёртывания</th><th scope="col">Время операций</th></tr></thead>
+                <tbody id="tester-rows"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

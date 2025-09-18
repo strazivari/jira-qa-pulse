@@ -1,0 +1,6 @@
+runId	cause	actor	detail	evidence
+301	REPORT_CODE		Генератор отчёта завершился с ошибкой на пустом наборе результатов	[report #301] renderer failed: empty results
+303	CI		Агент CI исчерпал место на диске при записи артефактов	[artifact #303] disk quota exceeded
+315	QA_INPUT	Алексей	Выбран профиль тестовых данных для другой сборки	[preflight #315] profile checkout-v1 incompatible with build checkout-v2
+317	QA_INPUT	Ирина	Путь к файлу результатов указан с опечаткой	[report #317] results path not found: build/resutls
+319	ENVIRONMENT		Сервис тестовых данных перестал отвечать во время сборки отчёта	[report #319] test-data service returned 503

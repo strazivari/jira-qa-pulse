@@ -1,0 +1,4 @@
+id	runId	causedByRunId	at	type	seconds	evidence
+D11	316	315	2026-11-20T07:03:00Z	REDEPLOY	480	[deploy D11] stage qa-west redeployed with profile checkout-v2, reason: run #315, completed in 480s
+R04	320	319	2026-11-18T10:21:00Z	SERVICE_RESTART	240	[restart R04] test-data service restored after run #319, completed in 240s
+D13	322		2026-11-19T17:12:00Z	REDEPLOY	600	[deploy D13] scheduled nightly refresh, completed in 600s
